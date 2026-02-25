@@ -1,0 +1,74 @@
+/*#  СТИЛИ (обычный CSS)*/
+/* Подключаем шрифты */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Nunito:wght@400;500;600&display=swap');
+
+:root {
+  --book-beige: #FDF6E3;
+  --book-brown: #8B7355;
+  --book-dark: #4A3728;
+}
+
+* {
+  font-family: 'Nunito', sans-serif;
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+.book-title {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+body,
+html {
+  margin: 0;
+  height: 100%;
+}
+
+.app-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #FDF6E3 0%, #F5E6D3 50%, #EDE0D4 100%);
+}
+
+/* Твои анимации */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.float-animation {
+  animation: float 4s ease-in-out infinite;
+}
+
+.btn-primary {
+  transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.02);
+}
