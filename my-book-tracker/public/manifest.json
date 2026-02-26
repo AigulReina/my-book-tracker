@@ -1,0 +1,16 @@
+{
+    "short_name": "MoodBook",
+    "name": "MoodBook — Твоя библиотека",
+    "icons": [
+        {
+            "src": "название_твоего_файла.png",
+            "sizes": "192x192 512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#FDF6E3",
+    "background_color": "#FDF6E3"
+}
