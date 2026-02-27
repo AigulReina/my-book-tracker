@@ -4,7 +4,7 @@ import './App.css';
 import myLogo from './assets/images/GIPHY ayesha ali.gif';
 import exitIcon from './assets/images/arrow-left pixel bytess.png';
 import defaultAvatar from './assets/images/frompinterest2.jpg';
-import decorationImg from './assets/images/frompinterest1.png';
+import decorationImg from './assets/images/fromPinterest1.png';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
