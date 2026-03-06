@@ -44,6 +44,9 @@ function App() {
       const parsedProfile = JSON.parse(savedProfile);
       if (!parsedProfile.avatar) parsedProfile.avatar = defaultAvatar;
       setUserProfile(parsedProfile);
+      // Если позиции нет в сохраненных данных,то ставим 50
+      if (!parsedProfile.avatarPosition) parsedProfile.avatarPosition = 50;
+      setUserProfile(parsedProfile);
     }
   }, []);
 
@@ -54,11 +57,20 @@ function App() {
 
   const handleFileUpload = (e, type) => {
     const file = e.target.files[0];
+
     if (file) {
+      // ПРОВЕРКА: Если файл больше 1 МБ (1024 * 1024 байт)
+      if (file.size > 1048576) {
+        alert("Файл слишком большой! Выберите фото до 1 МБ, чтобы приложение не сломалось.");
+        e.target.value = ""; // Очищаем поле выбора
+        return;
+      }
+
       const reader = new FileReader();
       reader.onloadend = () => {
         if (type === 'profile') {
-          setUserProfile({ ...userProfile, avatar: reader.result });
+          // При загрузке нового фото сбрасываем позицию на центр (50%)
+          setUserProfile({ ...userProfile, avatar: reader.result, avatarPosition: 50 });
         } else if (type === 'book') {
           setBookForm({ ...bookForm, coverUrl: reader.result });
         }
@@ -66,7 +78,6 @@ function App() {
       reader.readAsDataURL(file);
     }
   };
-
   const handleFakeGoogleLogin = () => {
     setIsLoading(true);
     setTimeout(() => { setIsLoggedIn(true); setIsLoading(false); }, 1200);
@@ -171,7 +182,7 @@ function App() {
                 alt="Avatar"
                 onClick={() => setIsPreviewOpen(true)}
                 className="relative w-full h-full rounded-full object-cover border-4 border-[#8B7355] shadow-sm transition-transform duration-500 group-hover:scale-105 cursor-zoom-in"
-              />
+                style={{ objectPosition: `center ${userProfile.avatarPosition || 50}%` }} />
               <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-2 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-[10px] text-white bg-[#8B7355] px-2 py-0.5 rounded-full whitespace-nowrap">Открыть фото</span>
               </div>
@@ -276,7 +287,21 @@ function App() {
                     📁
                   </label>
                 </div>
-
+                {/* для фото профиля: */}
+                <div className="space-y-2 mt-4 text-left">
+                  <div className="flex justify-between text-[10px] font-bold text-[#8B7355] uppercase tracking-widest">
+                    <span>Центровка фото</span>
+                    <span>{userProfile.avatarPosition || 50}%</span>
+                  </div>
+                  <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={userProfile.avatarPosition || 50}
+                    onChange={(e) => setUserProfile({ ...userProfile, avatarPosition: e.target.value })}
+                    className="w-full h-1.5 bg-[#D4C4B0]/50 rounded-lg appearance-none cursor-pointer accent-[#8B7355]"
+                  />
+                </div>
                 {/* ВОТ ОНА - КНОПКА  ТУТ */}
                 {userProfile.avatar !== defaultAvatar && (
                   <button
