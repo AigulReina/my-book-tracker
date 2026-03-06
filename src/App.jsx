@@ -180,7 +180,6 @@ function App() {
             <h2 className="text-4xl font-bold font-serif text-[#4A3728]">
               {userProfile.name.trim() || "Таинственный чтец"}
             </h2>
-            <h2 className="text-4xl font-bold font-serif text-[#4A3728] tracking-tight">{userProfile.name}</h2>
             <p className="text-[#8B7355] mt-3 mb-8 italic text-lg opacity-80">“{userProfile.bio}”</p>
 
             <div className="grid grid-cols-3 gap-4 mb-10 border-t border-b border-[#D4C4B0]/30 py-6">
